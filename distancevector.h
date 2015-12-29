@@ -1,6 +1,4 @@
 // Justin Slone, Alex Kerr, Tim Munson
-// CptS 455
-// Project 2: Distance Vector Routing
 // distancevector.h
 // Created 11/9/2015
 // Last modified 11/11/2015
