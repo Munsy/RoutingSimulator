@@ -57,7 +57,7 @@ P d
 by printing its routing table entry for destination `d`. If the `d` is omitted, all of the entries in the routing table will be printed.
 
 ##Implementation Notes
-The links between neighboring routers are simulated using connected datagram sockets, using a separate socket to communicate with each neighbor. Although it is not usually necessary to call `connect()` for datagram sockets (after calling bind to establish the port number for the local end), do in this project for the sockets used to communicate between routers. There are three reasons for this: 
+The links between neighboring routers are simulated using connected datagram sockets, using a separate socket to communicate with each neighbor. Although it is not usually necessary to call `connect()` for datagram sockets (after calling `bind()` to establish the port number for the local end), do in this project for the sockets used to communicate between routers. There are three reasons for this: 
 
 1. We can use `send()` and `recv()` instead of `sendto()` and `recvfrom()`.
 2. We don't have to look up the full IP address/port number when messages are received in order to know where they came from.
@@ -70,6 +70,34 @@ Each router has a socket associated with `baseport`, and additional sockets with
 ###Using the select() system call
 At any given time, the next message that the router has to process may arrive on any of the sockets. Additionally, each router is required to send its entire distance vector to its neighbors, even in the absence of incoming messages,
 every 30 seconds. To implement this behavior, we use the `select()` system call to find out which socket descriptor(s) have available messages and issue `recv()` calls only for those descriptors. Also, `select()` provides the mechanism we need for determining when 30 seconds have passed.
+
+##Additional Notes
+Extra programs have been provided to easily send the `P` and `L` control messages. These are Python scripts, so they will work on any machine where the Python interpreter is installed in /usr/bin/python.
+To send 'print' messages, use the `printtables` script:
+
+```
+printtables testdir r
+printtables testdir
+```
+
+The former will trigger the printing of router `r`’s table, while the latter will trigger the printing of all routers’ tables, by sending `P` messages to them.
+
+To update the cost of a link use, the `changelink` script:
+
+`
+changelink testdir r1 r2 c
+`
+
+In the above example, the `changelink` script will send the appropriate `L` messages to `r1` and `r2`.
+The `testdir` argument is needed because the program reads the router's configuration file in order to find the appropriate host and port destination for the messages that each router sends.
+
+Another handy program is `generateTest`, which you can use to make up your own test networks:
+
+`
+generateTest testdir
+`
+
+In the above example, `generateTest` reads the file `testdir/links` and produces the files `testdir/routers` along with `testdir/<routername>.cfg` for each router. `testdir/links` is just a list of links, one per line, consisting of the names of the two endpoints and the cost of the link. If any node of the graph has degree greater than 9, this program will work, but the generated configuration will have problems. You can fix it by changing `port = port + 10` near the bottom to `port = port + 20`.
 
 ## Co-Authors
 - Justin Sloan
