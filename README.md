@@ -97,7 +97,7 @@ Another handy program is `generateTest`, which you can use to make up your own t
 generateTest testdir
 `
 
-In the above example, `generateTest` reads the file `testdir/links` and produces the files `testdir/routers` along with `testdir/<routername>.cfg` for each router. `testdir/links` is just a list of links, one per line, consisting of the names of the two endpoints and the cost of the link. If any node of the graph has degree greater than 9, this program will work, but the generated configuration will have problems. You can fix it by changing `port = port + 10` near the bottom to `port = port + 20`.
+In the above example, `generateTest` reads the file `testdir/links` and produces the files `testdir/routers` along with `testdir/<routername>.cfg` for each router. `testdir/links` is just a list of links, one per line, consisting of the names of the two endpoints and the cost of the link. If any node of the graph has degree greater than 9, this program will still work, but the generated configuration file will have problems. You can fix it by changing `port = port + 10` near the bottom to `port = port + 20`.
 
 ## Co-Authors
 - Justin Sloan
