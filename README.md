@@ -40,6 +40,22 @@ L n cost
 
 Where `n` is the single-letter name of a neighbor and cost is the new cost of reaching that neighbor directly (as decimal digits). Link cost messages will only be received for existing links, but the cost of a link may change to infinity and back. Upon receiving either of these messages, the router makes the appropriate changes to its own distance-vector and to its routing table, and if there are changes, it sends the changed distance-vector immediately to its neighbors using `U` messages.
 
+###Output
+Whenever a routing table entry is added or changed, the program will print a message in the following format:
+
+`
+<r> - dest: <d> cost: <c> nexthop: <n>
+`
+
+Where `<r>` is the name of the router making the change, `<d>`, `<c>`, and `<n>` are the destination name, cost, and nexthop name. The remainder of the pattern, `<n>`, consists of literal characters.
+Each router responds to an incoming datagram consisting of:
+
+`
+P d
+`
+
+by printing its routing table entry for destination `d`. If the `d` is omitted, all of the entries in the routing table will be printed.
+
 ## Co-Authors
 - Justin Sloan
 - Alex Kerr
