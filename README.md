@@ -58,9 +58,9 @@ by printing its routing table entry for destination `d`. If the `d` is omitted, 
 
 ##Implementation Notes
 The links between neighboring routers are simulated using connected datagram sockets, using a separate socket to communicate with each neighbor. Although it is not usually necessary to call `connect()` for datagram sockets (after calling bind to establish the port number for the local end), do in this project for the sockets used to communicate between routers. There are three reasons for this: 
-1) We can use `send()` and `recv()` instead of `sendto()` and `recvfrom()` 
-2) We don't have to look up the full IP address/port number when messages are received in order to know where they came from.
-3) This forces us to use `select()` in order to handle multiple sockets, which is one of the key points of this project.
+1. We can use `send()` and `recv()` instead of `sendto()` and `recvfrom()` 
+2. We don't have to look up the full IP address/port number when messages are received in order to know where they came from.
+3. This forces us to use `select()` in order to handle multiple sockets, which is one of the key points of this project.
 
 Connected datagram sockets send and receive datagrams only to/from the host/port to which they are connected. Unlike with TCP, calling `connect()` for a datagram socket does **not** exchange setup messages with the other end. Instead, it simply sets the destination and port for the local socket. If datagrams are sent to a connected socket from an address/port that it is not connected to, the messages are simply discarded.
 In addition to these connected sockets, the router also creates another unconnected datagram socket bound to the local baseport to receive `L` and `P` messages (never `U` messages – those come only from neighbors on the appropriate connected sockets).
