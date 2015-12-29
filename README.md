@@ -100,13 +100,10 @@ generateTest testdir
 In the above example, `generateTest` reads the file `testdir/links` and produces the files `testdir/routers` along with `testdir/<routername>.cfg` for each router. `testdir/links` is just a list of links, one per line, consisting of the names of the two endpoints and the cost of the link. If any node of the graph has a degree greater than 9, this program will still work, but the generated configuration file will have problems. You can fix this by changing `port = port + 10` near the bottom to `port = port + 20`.
 
 ## References
-[RFC 1058 - Routing Information Protocol](https://tools.ietf.org/html/rfc1058)
-
-[select(2) - Linux man page](http://linux.die.net/man/2/select)
-
-[Wikipedia - Distance-vector routing protocol](https://en.wikipedia.org/wiki/Distance-vector_routing_protocol)
-
-[Wikipedia - Route poisoning](https://en.wikipedia.org/wiki/Route_poisoning)
+- [RFC 1058 - Routing Information Protocol](https://tools.ietf.org/html/rfc1058)
+- [select(2) - Linux man page](http://linux.die.net/man/2/select)
+- [Wikipedia - Distance-vector routing protocol](https://en.wikipedia.org/wiki/Distance-vector_routing_protocol)
+- [Wikipedia - Route poisoning](https://en.wikipedia.org/wiki/Route_poisoning)
 
 ## Co-Authors
 - Justin Sloan
