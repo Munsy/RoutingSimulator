@@ -71,7 +71,7 @@ Each router has a socket associated with `baseport`, and additional sockets with
 At any given time, the next message that the router has to process may arrive on any of the sockets. Additionally, each router is required to send its entire distance vector to its neighbors, even in the absence of incoming messages,
 every 30 seconds. To implement this behavior, we use the `select()` system call to find out which socket descriptor(s) have available messages and issue `recv()` calls only for those descriptors. Also, `select()` provides the mechanism we need for determining when 30 seconds have passed.
 
-##Additional Notes
+##Extra Resources
 Extra programs have been provided to easily send the `P` and `L` control messages. These are Python scripts, so they will work on any machine where the Python interpreter is installed in /usr/bin/python.
 To send 'print' messages, use the `printtables` script:
 
@@ -98,6 +98,12 @@ generateTest testdir
 `
 
 In the above example, `generateTest` reads the file `testdir/links` and produces the files `testdir/routers` along with `testdir/<routername>.cfg` for each router. `testdir/links` is just a list of links, one per line, consisting of the names of the two endpoints and the cost of the link. If any node of the graph has a degree greater than 9, this program will still work, but the generated configuration file will have problems. You can fix this by changing `port = port + 10` near the bottom to `port = port + 20`.
+
+## References
+https://tools.ietf.org/html/rfc1058
+http://linux.die.net/man/2/select
+https://en.wikipedia.org/wiki/Distance-vector_routing_protocol
+https://en.wikipedia.org/wiki/Route_poisoning
 
 ## Co-Authors
 - Justin Sloan
