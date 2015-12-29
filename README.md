@@ -101,7 +101,7 @@ In the above example, `generateTest` reads the file `testdir/links` and produces
 
 ## References
 - [RFC 1058 - Routing Information Protocol](https://tools.ietf.org/html/rfc1058)
-- [select(2) - Linux man page](http://linux.die.net/man/2/select)
+- [Linux man page - select()](http://linux.die.net/man/2/select)
 - [Wikipedia - Distance-vector routing protocol](https://en.wikipedia.org/wiki/Distance-vector_routing_protocol)
 - [Wikipedia - Route poisoning](https://en.wikipedia.org/wiki/Route_poisoning)
 
