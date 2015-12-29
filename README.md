@@ -67,7 +67,7 @@ Connected datagram sockets send and receive datagrams only to/from the host/port
 In addition to these connected sockets, the router also creates another unconnected datagram socket bound to the local baseport to receive `L` and `P` messages (never `U` messages – those come only from neighbors on the appropriate connected sockets).
 Each router has a socket associated with `baseport`, and additional sockets with portnumbers `baseport + 1, baseport + 2, …, baseport + numneighbors`. **If you run multiple routers on the same machine you must ensure that these ranges of port numbers do not overlap**.
 
-###Using select
+###Using the select() system call
 At any given time, the next message that the router has to process may arrive on any of the sockets. Additionally, each router is required to send its entire distance vector to its neighbors, even in the absence of incoming messages,
 every 30 seconds. To implement this behavior, we use the `select()` system call to find out which socket descriptor(s) have available messages and issue `recv()` calls only for those descriptors. Also, `select()` provides the mechanism we need for determining when 30 seconds have passed.
 
