@@ -31,7 +31,7 @@ U d1 cost1 d2 cost2 … dn costn
 
 That is, the letter `U` followed by a space, followed by a single-letter destination name, followed by a space, followed by the cost of reaching the destination from the neighbor expressed as a sequence of ascii decimal digits. The di and costi fields are repeated for as many entries as the sending router has in its own distance vector.
 
-###Link cost messages
+### Link cost messages
 The routers may receive link-cost changes as well. These look like:
 
 `
@@ -40,7 +40,7 @@ L n cost
 
 Where `n` is the single-letter name of a neighbor, and `cost` is the new cost of reaching that neighbor directly (as decimal digits). Link cost messages will only be received for existing links, but the cost of a link may change to infinity and back. Upon receiving either of these messages, the router makes the appropriate changes to its own distance-vector and to its routing table, and if there are changes, it sends the changed distance-vector immediately to its neighbors using `U` messages.
 
-###Output
+### Output
 Whenever a routing table entry is added or changed, the program will print a message in the following format:
 
 `
@@ -56,7 +56,7 @@ P d
 
 by printing its routing table entry for destination `d`. If the `d` is omitted, all of the entries in the routing table will be printed.
 
-##Implementation Notes
+## Implementation Notes
 The links between neighboring routers are simulated using connected datagram sockets, using a separate socket to communicate with each neighbor. Although it is not usually necessary to call `connect()` for datagram sockets (after calling `bind()` to establish the port number for the local end), do in this project for the sockets used to communicate between routers. There are three reasons for this: 
 
 1. We can use `send()` and `recv()` instead of `sendto()` and `recvfrom()`.
@@ -67,11 +67,11 @@ Connected datagram sockets send and receive datagrams only to/from the host/port
 In addition to these connected sockets, the router also creates another unconnected datagram socket bound to the local baseport to receive `L` and `P` messages (never `U` messages – those come only from neighbors on the appropriate connected sockets).
 Each router has a socket associated with `baseport`, and additional sockets with portnumbers `baseport + 1, baseport + 2, …, baseport + numneighbors`. **If you run multiple routers on the same machine you must ensure that these ranges of port numbers do not overlap**.
 
-###Using the select() system call
+### Using the select() system call
 At any given time, the next message that the router has to process may arrive on any of the sockets. Additionally, each router is required to send its entire distance vector to its neighbors, even in the absence of incoming messages,
 every 30 seconds. To implement this behavior, we use the `select()` system call to find out which socket descriptor(s) have available messages and issue `recv()` calls only for those descriptors. Also, `select()` provides the mechanism we need for determining when 30 seconds have passed.
 
-##Extra Resources
+## Extra Resources
 Extra programs have been provided to easily send the `P` and `L` control messages. These are Python scripts, so they will work on any machine where the Python interpreter is installed in /usr/bin/python.
 To send 'print' messages, use the `printtables` script:
 
